@@ -1,6 +1,7 @@
 from django.db import models
 
 class evento(models.Model):
+    id = models.BigAutoField(primary_key=True)
     fecha_inicio = models.DateField()
     fecha_termino = models.DateField()
     titulo = models.CharField(max_length=100)
