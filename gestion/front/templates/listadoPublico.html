@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Calendario (Placeholder) -->
+<img src="https://images.placeholders.dev/?width=800&height=600&text=Placeholder&bgColor=%23f7f6f6&textColor=%236d6e71" alt="Placeholder Calendario">
+
+<!-- Filtros -->
+<form>
+    <div class="row">
+        <div class="col-6">
+            <select name="segmento" onchange="this.form.submit()">
+                <option value="" default>Segmento</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+            </select>
+        </div>
+        <div class="col-6">
+            <select name="tipo" onchange="this.form.submit()">
+                <option value="" default>Tipo</option>
+                <option value="optionB">Option B</option>
+                <option value="optionC">Option C</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+<!-- Tabla de actividades -->
+<div class="row">
+    <div class="col-12" id="tableHead">
+        <h2>Actividades</h2>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <th scope="col-4">Hito</th>
+            <th scope="col-2">Fecha Inicio</th>
+            <th scope="col-2">Fecha Término</th>
+            <th scope="col-2">Tipo</th>
+            <th scope="col-2">Segmento</th>
+        </thead>
+        <tbody>
+            <!-- Rellenar con datos -->
+        </tbody>
+    </table>    
+    
+</div>
+
+{% endblock %}
