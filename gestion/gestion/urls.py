@@ -22,4 +22,5 @@ from front import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.publicList),
+    path('segmento/', views.segmentList),
 ]
