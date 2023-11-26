@@ -1,5 +1,5 @@
 from django.db import models
-
+from profile.choices import SAMPLE_CHOICES
 class evento(models.Model):
     id = models.BigAutoField(primary_key=True)
     fecha_inicio = models.DateField()
