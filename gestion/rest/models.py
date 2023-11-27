@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.db.models.signals import post_save
 
 
@@ -19,14 +19,12 @@ class evento(models.Model):
     
 class segmento(models.Model):
     id = models.BigAutoField(primary_key=True)
-    nombre = models.CharField(max_length=13)
+    nombre = models.CharField(max_length=50)
     def __str__(self):
         return self.nombre
 
-
-class AdminSegmento(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class UserSegmento(AbstractUser):
     segmento = models.ForeignKey(segmento, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return self.user.username
+        return self.username

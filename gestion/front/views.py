@@ -1,6 +1,7 @@
 from typing import OrderedDict
 from django.shortcuts import render
 from django.http import HttpRequest
+from django.contrib.auth import get_user_model
 
 from rest.views import EventoList, SegmentoList
 from rest.models import evento as eventoModel
@@ -27,14 +28,17 @@ def publicList(request: HttpRequest):
                     segmentos_evento['id'], eventos_a_filtrar['segmento']
                 ), eventos
             ))
-
-    return render(request, 'listadoPublico.html', {
+        
+    context = {
         'eventos': eventos,
         'segmentos': segmentos,
         'segmento_actual': int(segmento) if segmento else None,
         'tipo_actual': tipo,
         'tipos': tipos
-        })
+    }
+
+
+    return render(request, 'listadoPublico.html', context)
 
 def segmentList(request: HttpRequest):
     return render(request, 'listadoSegmento.html')
