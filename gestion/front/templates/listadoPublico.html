@@ -39,7 +39,19 @@
             <th scope="col-2">Segmento</th>
         </thead>
         <tbody>
-            <!-- Rellenar con datos -->
+            {% for evento in eventos %}
+            <tr>
+                <td>{{ evento.titulo }}</td>
+                <td>{{ evento.fecha_inicio }}</td>
+                <td>{{ evento.fecha_termino }}</td>
+                <td>{{ evento.tipo }}</td>
+                <td>
+                    {% for segmento in evento.segmento %}
+                    {{ segmento.nombre }}, 
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>    
     
