@@ -6,20 +6,22 @@
 <img src="https://images.placeholders.dev/?width=800&height=600&text=Placeholder&bgColor=%23f7f6f6&textColor=%236d6e71" alt="Placeholder Calendario">
 
 <!-- Filtros -->
-<form>
+<form method="get" name="filtros" class="mb-3">
     <div class="row">
-        <div class="col-6">
-            <select name="segmento" onchange="this.form.submit()">
-                <option value="" default>Segmento</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+        <div class="col-6"> <!-- Filtro de segmento del evento -->
+            <select name="segmento" class="form-select w-50" onchange="document.filtros.submit()">
+                <option value="" {% if request.GET.segmento == "" %}selected{% endif %}>Segmento</option>
+                {% for segmento in segmentos %}
+                <option value="{{ segmento.id }}" {% if segmento.id == segmento_actual %}selected{% endif %}>{{ segmento.nombre }}</option>
+                {% endfor %}
             </select>
         </div>
-        <div class="col-6">
-            <select name="tipo" onchange="this.form.submit()">
-                <option value="" default>Tipo</option>
-                <option value="optionB">Option B</option>
-                <option value="optionC">Option C</option>
+        <div class="col-6"> <!-- Filtro de tipo de evento -->
+            <select name="tipo" class="form-select w-50" onchange="this.form.submit()">
+                <option value="" {% if request.GET.tipo == "" %}selected{% endif %}>Tipo</option>
+                {% for tipo in tipos %}
+                <option value="{{ tipo.0 }}" {% if tipo.0 == tipo_actual %}selected{% endif %}>{{ tipo.1 }}</option>
+                {% endfor %}
             </select>
         </div>
     </div>
