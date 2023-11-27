@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.publicList),
     path('segmento/', views.segmentList),
-    path('api/', rest_views.EventoList.as_view()),
+    path('api/eventos', rest_views.EventoList.as_view()),
+    path('api/segmentos', rest_views.SegmentoList.as_view()),
 ]
