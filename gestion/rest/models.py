@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+
 
 class evento(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -15,8 +18,15 @@ class evento(models.Model):
         return self.titulo
     
 class segmento(models.Model):
+    id = models.BigAutoField(primary_key=True)
     nombre = models.CharField(max_length=13)
     def __str__(self):
         return self.nombre
 
 
+class AdminSegmento(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    segmento = models.ForeignKey(segmento, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
