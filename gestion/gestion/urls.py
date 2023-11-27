@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path
 
 from front import views
+from rest import views as rest_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.publicList),
     path('segmento/', views.segmentList),
+    path('api/', rest_views.EventoList.as_view()),
 ]
