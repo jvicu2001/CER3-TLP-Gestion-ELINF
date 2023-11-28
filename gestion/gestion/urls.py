@@ -23,7 +23,6 @@ from rest import views as rest_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.publicList),
-    path('segmento/', views.segmentList),
     path('api/eventos', rest_views.EventoList.as_view()),
     path('api/segmentos', rest_views.SegmentoList.as_view()),
     path("accounts/", include("django.contrib.auth.urls")),

@@ -5,6 +5,25 @@
 <!-- Calendario (Placeholder) -->
 <img src="https://images.placeholders.dev/?width=800&height=600&text=Placeholder&bgColor=%23f7f6f6&textColor=%236d6e71" alt="Placeholder Calendario">
 
+<!-- Tarjetas segmentos
+    Mostrar solo si el usuario está logeado
+-->
+
+{% if request.user.is_authenticated %}
+<div class="row">
+    {% for evento in eventos_proximos %}
+    <div class="card col-4">
+        <div class="card-body">
+            <h3 class="card-title">{{ evento.fecha_inicio }}</h3>
+            <h5 class="card-text">{{ evento.titulo }}</h5>
+            <p class="card-text">{{ evento.descripcion }}</p>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
 <!-- Filtros -->
 <form method="get" name="filtros" class="mb-3">
     <div class="row">

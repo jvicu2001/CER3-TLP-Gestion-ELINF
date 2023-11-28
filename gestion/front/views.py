@@ -12,6 +12,9 @@ def publicList(request: HttpRequest):
     eventos: OrderedDict = EventoList.as_view()(request).data
     segmentos: OrderedDict = SegmentoList.as_view()(request).data
 
+    # Copia primeros 3 eventos
+    eventos_proximos = eventos.copy()[0:3]
+
     tipos = eventoModel.tipo_choices
 
     # Filtrar eventos
@@ -39,6 +42,7 @@ def publicList(request: HttpRequest):
 
     if request.user.is_authenticated:
         context['segmento_usuario'] = request.user.usersegmento.segmento.id
+        context['eventos_proximos'] = eventos_proximos
 
     return render(request, 'listadoPublico.html', context)
 
