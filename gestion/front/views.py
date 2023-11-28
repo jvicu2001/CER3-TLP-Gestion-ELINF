@@ -2,6 +2,7 @@ from typing import OrderedDict
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 
 from rest.views import EventoList, SegmentoList
 from rest.models import evento as eventoModel
@@ -40,7 +41,7 @@ def publicList(request: HttpRequest):
         'tipos': tipos
     }
 
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and not isinstance(request.user, User):
         context['segmento_usuario'] = request.user.usersegmento.segmento.id
         context['eventos_proximos'] = eventos_proximos
 
