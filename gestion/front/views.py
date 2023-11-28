@@ -14,7 +14,7 @@ def publicList(request: HttpRequest):
     segmentos: OrderedDict = SegmentoList.as_view()(request).data
 
     # Copia primeros 3 eventos
-    eventos_proximos = eventos.copy()[0:3]
+    eventos_proximos = eventos.copy()
 
     tipos = dict(eventoModel.tipo_choices)
 
@@ -32,6 +32,9 @@ def publicList(request: HttpRequest):
                     segmentos_evento['id'], eventos_a_filtrar['segmento']
                 ), eventos
             ))
+
+    
+
         
     context = {
         'eventos': eventos,
@@ -41,8 +44,14 @@ def publicList(request: HttpRequest):
         'tipos': tipos
     }
 
-    if request.user.is_authenticated and not isinstance(request.user, User):
+    print(request.user.is_authenticated and hasattr(request.user, 'usersegmento'))
+    if request.user.is_authenticated and hasattr(request.user, 'usersegmento'):
         context['segmento_usuario'] = request.user.usersegmento.segmento.id
+
+        # Obtener eventos proximos para el usuario actual
+        eventos_proximos = [evento for evento in eventos if [
+            segmento for segmento in evento['segmento'] if segmento['id'] == context['segmento_usuario']
+        ]][:3]
         context['eventos_proximos'] = eventos_proximos
 
     return render(request, 'listadoPublico.html', context)
