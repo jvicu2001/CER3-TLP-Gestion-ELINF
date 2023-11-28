@@ -15,7 +15,7 @@ def publicList(request: HttpRequest):
     # Copia primeros 3 eventos
     eventos_proximos = eventos.copy()[0:3]
 
-    tipos = eventoModel.tipo_choices
+    tipos = dict(eventoModel.tipo_choices)
 
     # Filtrar eventos
     tipo = request.GET.get('tipo')

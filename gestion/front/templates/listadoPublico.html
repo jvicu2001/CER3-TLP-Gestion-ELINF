@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load template_filters %}
 {% block content %}
 
 <!-- Calendario (Placeholder) -->
@@ -38,7 +39,7 @@
         <div class="col-6"> <!-- Filtro de tipo de evento -->
             <select name="tipo" class="form-select w-50" onchange="this.form.submit()">
                 <option value="" {% if request.GET.tipo == "" %}selected{% endif %}>Tipo</option>
-                {% for tipo in tipos %}
+                {% for tipo in tipos.items %}
                 <option value="{{ tipo.0 }}" {% if tipo.0 == tipo_actual %}selected{% endif %}>{{ tipo.1 }}</option>
                 {% endfor %}
             </select>
@@ -65,7 +66,7 @@
                 <td>{{ evento.titulo }}</td>
                 <td>{{ evento.fecha_inicio }}</td>
                 <td>{{ evento.fecha_termino }}</td>
-                <td>{{ evento.tipo }}</td>
+                <td>{{ tipos|get_value:evento.tipo }}</td>
                 <td>
                     {% for segmento in evento.segmento %}
                     {{ segmento.nombre }}, 
