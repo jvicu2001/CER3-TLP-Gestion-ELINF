@@ -37,6 +37,8 @@ def publicList(request: HttpRequest):
         'tipos': tipos
     }
 
+    if request.user.is_authenticated:
+        context['segmento_usuario'] = request.user.usersegmento.segmento.id
 
     return render(request, 'listadoPublico.html', context)
 

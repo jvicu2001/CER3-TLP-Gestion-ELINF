@@ -23,8 +23,9 @@ class segmento(models.Model):
     def __str__(self):
         return self.nombre
 
-class UserSegmento(AbstractUser):
+class UserSegmento(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     segmento = models.ForeignKey(segmento, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return self.username
+        return self.user.username
